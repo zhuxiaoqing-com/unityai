@@ -54,6 +54,10 @@ func CalculatePointSide(l0, l1, point Vector2f) float32 {
 	return (l1.y-l0.y)*(point.x-l0.x) - (l1.x-l0.x)*(point.y-l0.y)
 }
 
+/*
+*
+这段代码是用来计算二维点集的凸包（Convex Hull）的，采用了 Andrew's Monotone Chain Algorithm 算法。
+*/
 func CalculateConvexHull(hull *Vertex2Array, points *Vertex2Array) {
 	// TODO : prune (near) duplicate points before calculating hull
 	hull.resize_uninitialized(0)

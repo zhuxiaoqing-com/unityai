@@ -271,7 +271,7 @@ func ClosestHeightPointTriangle(h *float32, p, a, b, c Vector3f) bool {
 	// are interpolated along the edges of the triangles.
 	EPS := float32(1e-4)
 
-	// If point lies inside the triangle, return interpolated ycoord.
+	// If point lies inside the triangle, return interpolated ycoord.  如果点位于三角形内，返回插值后的ycoord。
 	if u >= -EPS && v >= -EPS && (u+v) <= 1.0+EPS {
 		*h = a.y + v0.y*u + v1.y*v
 		return true
@@ -288,7 +288,7 @@ func TriangleAreaXZ(pa, pb, pc Vector3f) float32 {
 	ac := pc.x * (pa.z - pb.z)
 	area := (aa + ab + ac) / 2
 	if area < 0 {
-		area = - area
+		area = -area
 	}
 	return area
 }

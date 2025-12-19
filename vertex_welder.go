@@ -24,11 +24,11 @@ func NewVertexWelder(BucketCount int, verts *[]Vector3f, weldThr float32) *Verte
 }
 
 type VertexWelder struct {
-	m_weldThr   float32
-	m_verts     *[]Vector3f
-	m_next      []int
-	m_first     []int
-	BucketCount int
+	m_weldThr   float32     // 焊接阈值，相距小于这个距离的顶点会被视为相同顶点
+	m_verts     *[]Vector3f // 指向顶点数组的指针（要进行焊接的顶点集合）
+	m_next      []int       // 链表方式存储相同桶中顶点的索引，用于冲突处理
+	m_first     []int       // 每个桶的第一个顶点索引，方便快速查找桶内顶点
+	BucketCount int         // 哈希桶的数量，用于加速查找
 }
 
 func (this *VertexWelder) GetCellSize() float32 {

@@ -190,6 +190,7 @@ func PrevIndex(index, modulus int32) int32 {
 	}
 }
 
+// 这里是叉乘 如果是三角形 面积还需要/2
 func TriArea2D(a, b, c Vector3f) float32 {
 	abx := b.x - a.x
 	abz := b.z - a.z

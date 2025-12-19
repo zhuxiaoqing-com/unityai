@@ -19,6 +19,7 @@ type Poly struct {
 type DataType int32
 
 type Hull []Plane
+
 func (this *Hull) emplace_back_uninitialized() *Plane {
 	*this = append(*this, Plane{})
 	return &(*this)[len(*this)-1]
@@ -35,6 +36,12 @@ func (this *Polygon) resize_uninitialized(size int) {
 	}
 }
 
+/*
+*
+在多边形尾部增加一个新顶点（初始化为零）
+
+返回这个新顶点的地址，方便直接写入数据
+*/
 func (this *Polygon) emplace_back_uninitialized() *Vector3f {
 	*this = append(*this, Vector3f{})
 	return &(*this)[len(*this)-1]
@@ -60,6 +67,7 @@ func (this *PolygonContainer) push_back(tri Polygon) {
 	*this = append(*this, tri)
 }
 
+// 删除指定索引的元素
 func (this *PolygonContainer) erase(index int) {
 	if index == len(*this)-1 {
 		*this = (*this)[:len(*this)-1]
@@ -123,8 +131,8 @@ func (this *PolyList) erase(index int) {
 
 type DynamicMesh struct {
 	m_Polygons    PolyList
-	m_Vertices    []Vector3f
-	m_Data        []DataType
+	m_Vertices    []Vector3f    //和m_Welder m_Vertices是一个引用
+	m_Data        []DataType    // poly在 DetailMesh 里的索引
 	m_Welder      *VertexWelder //BucketCount=2048
 	m_QuantFactor float32
 }
